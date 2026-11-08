@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Grammar\C3pp.g4" />
+    <Antlr4 Include="Grammar\C3pp.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>C3Plus.Compiler.Generated</CustomToolNamespace>
+    </Antlr4>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Antlr4.Runtime.Standard" />
+  </ItemGroup>
+  <ItemGroup>
+  <C3ppFile Include="Grammar\C3pp.g4" />
+</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\C3Plus.CodeFactories\C3Plus.CodeFactories.csproj" />
+  </ItemGroup>
+
+<Target Name="TranspileC3pp" BeforeTargets="BeforeCompile" Inputs="@(C3ppFile)" Outputs="%(C3ppFile.Filename).g.cs">
+  <PropertyGroup>
+    <TranspilerPath>$(MSBuildProjectDirectory)\..\C3ppTranspiler\bin\Debug\net10.0\C3ppTranspiler.exe</TranspilerPath>
+  </PropertyGroup>
+
+  <Exec Command="&quot;$(TranspilerPath)&quot; &quot;%(C3ppFile.Identity)&quot; -o &quot;%(C3ppFile.Filename).g.cs&quot;" Condition="Exists('$(TranspilerPath)')" />
+</Target>
+</Project>

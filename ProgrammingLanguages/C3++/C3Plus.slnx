@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/C3Plus.CodeFactories/C3Plus.CodeFactories.csproj" />
+    <Project Path="src/C3Plus.Compiler/C3Plus.Compiler.csproj" />
+    <Project Path="src/C3Plus.Runtime/C3Plus.Runtime.csproj" />
+    <Project Path="src/C3ppTranspiler/C3ppTranspiler.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/C3Plus.Tests/C3Plus.Tests.csproj" />
+  </Folder>
+</Solution>
